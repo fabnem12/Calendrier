@@ -6,7 +6,7 @@ std::vector<std::string> noms_mois = {"Janvier","Février","Mars","Avril","Mai",
 std::vector<int> long_mois = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int longueurMois(int idMois, bool bissextile) {
-    return ((idMois != 1 || !bissextile) ? long_mois[idMois] : 29);
+    return ((idMois != 1 || !bissextile) ? long_mois[idMois] : 29); //si l'année est bissextile et qu'on demande la longueur de février, on renvoie 29
 }
 
 /** Génère le string correspondant au calendrier du mois demandé
@@ -17,13 +17,15 @@ int longueurMois(int idMois, bool bissextile) {
 **/
 std::string affiMois(int idMois, int premierJour, bool bissextile) {
     std::string nomMois = noms_mois[idMois];
-    int espaceAvantApresNom = (20 - nomMois.size()) / 2;
+    int espaceAvantApresNom = (20 - nomMois.size()) / 2; //20 parce que la ligne avec les noms des jours fait 20 caractères de large, et c'est elle qui sert de repère
 
+    //On centre le nom du mois
     std::string affi = "";
     for (int i = 0; i < espaceAvantApresNom; i++) affi += " ";
     affi += nomMois;
     for (int i = 0; i < espaceAvantApresNom; i++) affi += " ";
 
+    //Noms des jours
     affi += "\nlu ma me je ve sa di\n";
 
     for (int jour = 0; jour-premierJour < longueurMois(idMois, bissextile); jour++) {
